@@ -3,8 +3,8 @@
     <p>STEP1</p>
     <p>お客様の情報を入力してください</p>
     <p>性別</p>
-    <input type="radio" name="sex" value="man" v-model="pickedSex">男性
-    <input type="radio" name="sex" value="woman" v-model="pickedSex">女性
+    <input type="radio" name="sex" value="man" v-model="sexChangeMan">男性
+    <input type="radio" name="sex" value="woman" v-model="sexChangeWoman">女性
     <p>生年月日</p>
     <form>
       <select v-model="year" @change="getDays">
@@ -35,9 +35,20 @@ export default {
   created() {
     this.getDays();
   },
+  computed: {
+    currentSexQuestion() {
+      return this.$store.getters.currentSexQuestion
+    }
+  },
   methods: {
     getDays: function() {
       this.daysMax = new Date(this.year, this.month, 0).getDate();
+    },
+    sexChangeMan: function() {
+      this.$store.dispatch("sexChangeManAction")
+    },
+    sexChangeWoman: function() {
+      this.$store.dispatch("sexChangeWomanAction")
     }
   },
   filters: {
