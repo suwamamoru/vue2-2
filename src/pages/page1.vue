@@ -3,8 +3,8 @@
     <p>STEP1</p>
     <p>お客様の情報を入力してください</p>
     <p>性別</p>
-    <input type="radio" name="sex" value="man" v-model="sexChangeMan">男性
-    <input type="radio" name="sex" value="woman" v-model="sexChangeWoman">女性
+    <input type="radio" name="sex" value="man" v-model="pickedSex" @change="sexChange">男性
+    <input type="radio" name="sex" value="woman" v-model="pickedSex" @change="sexChange">女性
     <p>生年月日</p>
     <form>
       <select v-model="year" @change="getDays">
@@ -17,11 +17,14 @@
         <option v-for="n in daysMax" v-bind:key="n">{{n}}</option>
       </select>日
     </form>
+    <p>{{currentSexQuestion}}</p>
+    <p>{{currentBirthDayQuestion}}</p>
     <router-link to="/page2">次へ進む</router-link>
   </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -33,22 +36,28 @@ export default {
     }
   },
   created() {
-    this.getDays();
+    this.getDays()
+    this.sexChange()
   },
   computed: {
     currentSexQuestion() {
       return this.$store.getters.currentSexQuestion
+    },
+    currentBirthDayQuestion() {
+      return this.$store.getters.currentBirthDayQuestion
     }
   },
   methods: {
     getDays: function() {
       this.daysMax = new Date(this.year, this.month, 0).getDate();
+      this.$store.dispatch("getDaysAction")
     },
-    sexChangeMan: function() {
-      this.$store.dispatch("sexChangeManAction")
-    },
-    sexChangeWoman: function() {
-      this.$store.dispatch("sexChangeWomanAction")
+    sexChange: function() {
+      if (this.pickedSex === 'man') {
+        this.$store.dispatch("sexChangeManAction")
+      } else if (this.pickedSex === 'woman') {
+        this.$store.dispatch("sexChangeWomanAction")
+      }
     }
   },
   filters: {
