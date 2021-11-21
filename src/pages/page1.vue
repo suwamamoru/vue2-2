@@ -17,14 +17,12 @@
         <option v-for="n in daysMax" v-bind:key="n">{{n}}</option>
       </select>日
     </form>
-    <p>{{currentSexQuestion}}</p>
-    <p>{{currentBirthDayQuestion}}</p>
+    <p>{{$store.getters.year}}</p>
     <router-link to="/page2">次へ進む</router-link>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -43,14 +41,18 @@ export default {
     currentSexQuestion() {
       return this.$store.getters.currentSexQuestion
     },
-    currentBirthDayQuestion() {
-      return this.$store.getters.currentBirthDayQuestion
-    }
+    year: {
+      get() {
+        return this.$store.getters.year
+      },
+      set(value) {
+        this.$store.dispatch("getYear", value)
+      }
+    },
   },
   methods: {
     getDays: function() {
       this.daysMax = new Date(this.year, this.month, 0).getDate();
-      this.$store.dispatch("getDaysAction")
     },
     sexChange: function() {
       if (this.pickedSex === 'man') {

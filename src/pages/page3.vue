@@ -3,9 +3,9 @@
     <p>STEP3</p>
     <div>
       <p>- ご相談内容 -</p>
-      <textarea v-model="answer" @input="answerInput"></textarea>
+      <input type="text" v-model="answer">
     </div>
-    <p>{{currentAnswer}}</p>
+    <p>{{$store.getters.answer}}</p>
     <router-link to="/page2">前に戻る</router-link>
     <router-link to="/page4">次へ進む</router-link>
   </div>
@@ -13,22 +13,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      answer: ''
-    }
-  },
   computed: {
-    currentAnswer() {
-      return this.$store.getters.currentAnswer
-    }
-  },
-  created() {
-    this.answerInput()
-  },
-  methods: {
-    answerInput: function() {
-      this.$store.dispatch("answerAction")
+    answer: {
+      get() {
+        return this.$store.getters.answer
+      },
+      set(value) {
+        this.$store.dispatch("getAnswer", value)
+      }
     }
   }
 }

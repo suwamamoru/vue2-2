@@ -6,11 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     sexQuestion: '',
-    birthDayQuestion: {
-      year: '',
-      month: '',
-      day: ''
-    },
+    year: '',
+    month: '',
+    day: '',
     closeQuestion1: '',
     closeQuestion2: '',
     closeQuestion3: '',
@@ -23,10 +21,14 @@ export default new Vuex.Store({
     sexChangeWomanMutation (state) {
       state.sexQuestion = '女性'
     },
-    getDaysMutation (state) {
-      state.birthDayQuestion.year = ''
-      state.birthDayQuestion.month = ''
-      state.birthDayQuestion.day = ''
+    setYear (state, year) {
+      state.year = year
+    },
+    setMonth (state, month) {
+      state.month = month
+    },
+    setDay (state, day) {
+      state.day = day
     },
     closeQuestionYesMutation1 (state) {
       state.closeQuestion1 = 'はい'
@@ -46,8 +48,8 @@ export default new Vuex.Store({
     closeQuestionNoMutation3 (state) {
       state.closeQuestion3 = 'いいえ'
     },
-    answerMutation (state) {
-      state.answer = ''
+    setAnswer (state, answer) {
+      state.answer = answer
     }
   },
   actions: {
@@ -57,8 +59,14 @@ export default new Vuex.Store({
     sexChangeWomanAction: ({commit}) => {
       commit('sexChangeWomanMutation')
     },
-    getDaysAction: ({commit}) => {
-      commit('getDaysMutation')
+    getYear: ({commit}, year) => {
+      commit('setYear', year)
+    },
+    getMonth: ({commit}, month) => {
+      commit('getMonthMutation', month)
+    },
+    getDay: ({commit}, day) => {
+      commit('getDayMutation', day)
     },
     closeQuestionYesAction1: ({commit}) => {
       commit('closeQuestionYesMutation1')
@@ -78,16 +86,22 @@ export default new Vuex.Store({
     closeQuestionNoAction3: ({commit}) => {
       commit('closeQuestionNoMutation3')
     },
-    answerAction: ({commit}) => {
-      commit('answerMutation')
+    getAnswer: ({commit}, answer) => {
+      commit('setAnswer', answer)
     }
   },
   getters: {
     currentSexQuestion: state => {
       return state.sexQuestion
     },
-    currentBirthDayQuestion: state => {
-      return state.birthDayQuestion
+    currentYear: state => {
+      return state.year
+    },
+    currentMonth: state => {
+      return state.month
+    },
+    currentDay: state => {
+      return state.day
     },
     currentCloseQuestion1: state => {
       return state.closeQuestion1
@@ -98,7 +112,7 @@ export default new Vuex.Store({
     currentCloseQuestion3: state => {
       return state.closeQuestion3
     },
-    currentAnswer: state => {
+    answer: state => {
       return state.answer
     }
   }
