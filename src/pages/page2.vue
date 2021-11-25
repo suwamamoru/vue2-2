@@ -16,9 +16,6 @@
       <input type="radio" name="radio2" value="yes" v-model="pickedQuestion3" @change="closeQuestionChange3">はい
       <input type="radio" name="radio2" value="no" v-model="pickedQuestion3" @change="closeQuestionChange3">いいえ
     </div>
-    <p>{{currentCloseQuestion1}}</p>
-    <p>{{currentCloseQuestion2}}</p>
-    <p>{{currentCloseQuestion3}}</p>
     <router-link to="/">前に戻る</router-link>
     <router-link to="/page3">次へ進む</router-link>
   </div>
@@ -38,17 +35,6 @@ export default {
       pickedQuestion1: [],
       pickedQuestion2: [],
       pickedQuestion3: []
-    }
-  },
-  computed: {
-    currentCloseQuestion1() {
-      return this.$store.getters.currentCloseQuestion1
-    },
-    currentCloseQuestion2() {
-      return this.$store.getters.currentCloseQuestion2
-    },
-    currentCloseQuestion3() {
-      return this.$store.getters.currentCloseQuestion3
     }
   },
   created() {

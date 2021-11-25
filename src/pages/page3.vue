@@ -5,7 +5,6 @@
       <p>- ご相談内容 -</p>
       <input type="text" v-model="answer">
     </div>
-    <p>{{$store.getters.answer}}</p>
     <router-link to="/page2">前に戻る</router-link>
     <router-link to="/page4">次へ進む</router-link>
   </div>

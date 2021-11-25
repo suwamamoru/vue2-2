@@ -63,10 +63,10 @@ export default new Vuex.Store({
       commit('setYear', year)
     },
     getMonth: ({commit}, month) => {
-      commit('getMonthMutation', month)
+      commit('setMonth', month)
     },
     getDay: ({commit}, day) => {
-      commit('getDayMutation', day)
+      commit('setDay', day)
     },
     closeQuestionYesAction1: ({commit}) => {
       commit('closeQuestionYesMutation1')

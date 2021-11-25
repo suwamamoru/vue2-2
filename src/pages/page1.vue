@@ -7,17 +7,16 @@
     <input type="radio" name="sex" value="woman" v-model="pickedSex" @change="sexChange">女性
     <p>生年月日</p>
     <form>
-      <select v-model="year" @change="getDays">
+      <select v-model="dateYear" @change="getDays">
         <option v-for="n in 100" v-bind:value="n + 1921" v-bind:key="n">{{(n + 1921) | era}}</option>
       </select>年
-      <select v-model="month" @change="getDays">
+      <select v-model="dateMonth" @change="getDays">
         <option v-for="n in 12" v-bind:key="n">{{n}}</option>
       </select>月
-      <select v-model="day" @change="getDays">
+      <select v-model="dateDay" @change="getDays">
         <option v-for="n in daysMax" v-bind:key="n">{{n}}</option>
       </select>日
     </form>
-    <p>{{$store.getters.year}}</p>
     <router-link to="/page2">次へ進む</router-link>
   </div>
 </template>
@@ -26,9 +25,9 @@
 export default {
   data() {
     return {
-      year: 2000,
-      month: 1,
-      day: 1,
+      dateYear: 2000,
+      dateMonth: 1,
+      dateDay: 1,
       daysMax: '',
       pickedSex: []
     }
@@ -38,9 +37,6 @@ export default {
     this.sexChange()
   },
   computed: {
-    currentSexQuestion() {
-      return this.$store.getters.currentSexQuestion
-    },
     year: {
       get() {
         return this.$store.getters.year
@@ -49,10 +45,29 @@ export default {
         this.$store.dispatch("getYear", value)
       }
     },
+    month: {
+      get() {
+        return this.$store.getters.month
+      },
+      set(value) {
+        this.$store.dispatch("getMonth", value)
+      }
+    },
+    day: {
+      get() {
+        return this.$store.getters.day
+      },
+      set(value) {
+        this.$store.dispatch("getDay", value)
+      }
+    }
   },
   methods: {
     getDays: function() {
-      this.daysMax = new Date(this.year, this.month, 0).getDate();
+      this.year = this.dateYear;
+      this.month = this.dateMonth;
+      this.day = this.dateDay;
+      this.daysMax = new Date(this.dateYear, this.dateMonth, 0).getDate();
     },
     sexChange: function() {
       if (this.pickedSex === 'man') {
