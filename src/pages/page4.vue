@@ -4,15 +4,15 @@
     <h2>以下の内容をご確認ください</h2>
     <div>
       <p>性別</p>
-      <p>{{$store.getters.currentSexQuestion}}</p>
+      <p>{{$store.getters.sex}}</p>
       <p>生年月日</p>
-      <p>{{$store.getters.currentYear}}年{{$store.getters.currentMonth}}月{{$store.getters.currentDay}}日</p>
+      <p>{{$store.getters.year}}年{{$store.getters.month}}月{{$store.getters.day}}日</p>
       <p>現在、生命保険に加入されていますか？</p>
-      <p>{{$store.getters.currentCloseQuestion1}}</p>
+      <p>{{$store.getters.question1}}</p>
       <p>現在入院中ですか。または、最近３ヶ月以内に医師の診察・検査の結果、入院・手術をすすめられたことはありますか？</p>
-      <p>{{$store.getters.currentCloseQuestion2}}</p>
+      <p>{{$store.getters.question2}}</p>
       <p>過去５年以内に、病気やけがで、手術を受けたことまたは継続して７日以上の入院をしたことがありますか？</p>
-      <p>{{$store.getters.currentCloseQuestion3}}</p>
+      <p>{{$store.getters.question3}}</p>
       <p>- ご相談内容 -</p>
       <p>{{$store.getters.answer}}</p>
     </div>
@@ -24,26 +24,26 @@
 <script>
 export default {
   computed: {
-    currentSexQuestion() {
-      return this.$store.getters.currentSexQuestion
+    sex() {
+      return this.$store.getters.sex
     },
-    currentYear() {
-      return this.$store.getters.currentYear
+    year() {
+      return this.$store.getters.year
     },
-    currentMonth() {
-      return this.$store.getters.currentMonth
+    month() {
+      return this.$store.getters.month
     },
-    currentDay() {
-      return this.$store.getters.currentDay
+    day() {
+      return this.$store.getters.day
     },
-    currentCloseQuestion1() {
-      return this.$store.getters.currentCloseQuestion1
+    question1() {
+      return this.$store.getters.question1
     },
-    currentCloseQuestion2() {
-      return this.$store.getters.currentCloseQuestion2
+    question2() {
+      return this.$store.getters.question2
     },
-    currentCloseQuestion3() {
-      return this.$store.getters.currentCloseQuestion3
+    question3() {
+      return this.$store.getters.question3
     },
     answer() {
       return this.$store.getters.answer

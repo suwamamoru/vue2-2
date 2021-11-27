@@ -3,17 +3,17 @@
     <p>STEP1</p>
     <p>お客様の情報を入力してください</p>
     <p>性別</p>
-    <input type="radio" name="sex" value="man" v-model="pickedSex" @change="sexChange">男性
-    <input type="radio" name="sex" value="woman" v-model="pickedSex" @change="sexChange">女性
+    <input type="radio" name="sex" value="男性" v-model="sex">男性
+    <input type="radio" name="sex" value="女性" v-model="sex">女性
     <p>生年月日</p>
     <form>
-      <select v-model="dateYear" @change="getDays">
+      <select v-model="year" @change="getDays">
         <option v-for="n in 100" v-bind:value="n + 1921" v-bind:key="n">{{(n + 1921) | era}}</option>
       </select>年
-      <select v-model="dateMonth" @change="getDays">
+      <select v-model="month" @change="getDays">
         <option v-for="n in 12" v-bind:key="n">{{n}}</option>
       </select>月
-      <select v-model="dateDay" @change="getDays">
+      <select v-model="day" @change="getDays">
         <option v-for="n in daysMax" v-bind:key="n">{{n}}</option>
       </select>日
     </form>
@@ -25,18 +25,24 @@
 export default {
   data() {
     return {
-      dateYear: 2000,
-      dateMonth: 1,
-      dateDay: 1,
+      dateYear: '',
+      dateMonth: '',
+      dateDay: '',
       daysMax: '',
-      pickedSex: []
     }
   },
   created() {
     this.getDays()
-    this.sexChange()
   },
   computed: {
+    sex: {
+      get() {
+        return this.$store.getters.sex
+      },
+      set(value) {
+        this.$store.dispatch("getSex", value)
+      }
+    },
     year: {
       get() {
         return this.$store.getters.year
@@ -64,17 +70,10 @@ export default {
   },
   methods: {
     getDays: function() {
-      this.year = this.dateYear;
-      this.month = this.dateMonth;
-      this.day = this.dateDay;
-      this.daysMax = new Date(this.dateYear, this.dateMonth, 0).getDate();
-    },
-    sexChange: function() {
-      if (this.pickedSex === 'man') {
-        this.$store.dispatch("sexChangeManAction")
-      } else if (this.pickedSex === 'woman') {
-        this.$store.dispatch("sexChangeWomanAction")
-      }
+      this.dateYear = this.year
+      this.dateMonth = this.month
+      this.dateDay = this.day
+      this.daysMax = new Date(this.dateYear, this.dateMonth, 0).getDate()
     }
   },
   filters: {

@@ -3,18 +3,18 @@
     <p>STEP2</p>
     <div>
       <p>{{questionnaire[0]}}</p>
-      <input type="radio" name="radio0" value="yes" @click="nextQuestion1" v-model="pickedQuestion1" @change="closeQuestionChange1">はい
-      <input type="radio" name="radio0" value="no" @click="nextQuestion1" v-model="pickedQuestion1" @change="closeQuestionChange1">いいえ
+      <input type="radio" name="radio0" value="はい" v-model="question1">はい
+      <input type="radio" name="radio0" value="いいえ" v-model="question1">いいえ
     </div>
-    <div v-show="isShow1">
+    <div v-show="question1">
       <p>{{questionnaire[1]}}</p>
-      <input type="radio" name="radio1" value="yes" @click="nextQuestion2" v-model="pickedQuestion2" @change="closeQuestionChange2">はい
-      <input type="radio" name="radio1" value="no" @click="nextQuestion2" v-model="pickedQuestion2" @change="closeQuestionChange2">いいえ
+      <input type="radio" name="radio1" value="はい" v-model="question2">はい
+      <input type="radio" name="radio1" value="いいえ" v-model="question2">いいえ
     </div>
-    <div v-show="isShow2">
+    <div v-show="question2">
       <p>{{questionnaire[2]}}</p>
-      <input type="radio" name="radio2" value="yes" v-model="pickedQuestion3" @change="closeQuestionChange3">はい
-      <input type="radio" name="radio2" value="no" v-model="pickedQuestion3" @change="closeQuestionChange3">いいえ
+      <input type="radio" name="radio2" value="はい" v-model="question3">はい
+      <input type="radio" name="radio2" value="いいえ" v-model="question3">いいえ
     </div>
     <router-link to="/">前に戻る</router-link>
     <router-link to="/page3">次へ進む</router-link>
@@ -29,45 +29,32 @@ export default {
         '現在、生命保険に加入されていますか？',
         '現在入院中ですか。または、最近３ヶ月以内に医師の診察・検査の結果、入院・手術をすすめられたことはありますか？',
         '過去５年以内に、病気やけがで、手術を受けたことまたは継続して７日以上の入院をしたことがありますか？'
-      ],
-      isShow1: false,
-      isShow2: false,
-      pickedQuestion1: [],
-      pickedQuestion2: [],
-      pickedQuestion3: []
+      ]
     }
   },
-  created() {
-    this.closeQuestionChange1()
-    this.closeQuestionChange2()
-    this.closeQuestionChange3()
-  },
-  methods: {
-    nextQuestion1: function () {
-      this.isShow1 = true
-    },
-    nextQuestion2: function () {
-      this.isShow2 = true
-    },
-    closeQuestionChange1: function() {
-      if (this.pickedQuestion1 === 'yes') {
-        this.$store.dispatch("closeQuestionYesAction1")
-      } else if (this.pickedQuestion1 === 'no') {
-        this.$store.dispatch("closeQuestionNoAction1")
+  computed: {
+    question1: {
+      get() {
+        return this.$store.getters.question1
+      },
+      set(value) {
+        this.$store.dispatch("getQuestion1", value)
       }
     },
-    closeQuestionChange2: function() {
-      if (this.pickedQuestion2 === 'yes') {
-        this.$store.dispatch("closeQuestionYesAction2")
-      } else if (this.pickedQuestion2 === 'no') {
-        this.$store.dispatch("closeQuestionNoAction2")
+    question2: {
+      get() {
+        return this.$store.getters.question2
+      },
+      set(value) {
+        this.$store.dispatch("getQuestion2", value)
       }
     },
-    closeQuestionChange3: function() {
-      if (this.pickedQuestion3 === 'yes') {
-        this.$store.dispatch("closeQuestionYesAction3")
-      } else if (this.pickedQuestion3 === 'no') {
-        this.$store.dispatch("closeQuestionNoAction3")
+    question3: {
+      get() {
+        return this.$store.getters.question3
+      },
+      set(value) {
+        this.$store.dispatch("getQuestion3", value)
       }
     }
   }

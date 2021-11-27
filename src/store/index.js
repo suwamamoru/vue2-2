@@ -5,21 +5,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    sexQuestion: '',
-    year: '',
-    month: '',
-    day: '',
-    closeQuestion1: '',
-    closeQuestion2: '',
-    closeQuestion3: '',
+    sex: '',
+    year: '2000',
+    month: '1',
+    day: '1',
+    question1: '',
+    question2: '',
+    question3: '',
     answer: ''
   },
   mutations: {
-    sexChangeManMutation (state) {
-      state.sexQuestion = '男性'
-    },
-    sexChangeWomanMutation (state) {
-      state.sexQuestion = '女性'
+    setSex (state, sex) {
+      state.sex = sex
     },
     setYear (state, year) {
       state.year = year
@@ -30,34 +27,22 @@ export default new Vuex.Store({
     setDay (state, day) {
       state.day = day
     },
-    closeQuestionYesMutation1 (state) {
-      state.closeQuestion1 = 'はい'
+    setQuestion1 (state, question1) {
+      state.question1 = question1
     },
-    closeQuestionNoMutation1 (state) {
-      state.closeQuestion1 = 'いいえ'
+    setQuestion2 (state, question2) {
+      state.question2 = question2
     },
-    closeQuestionYesMutation2 (state) {
-      state.closeQuestion2 = 'はい'
-    },
-    closeQuestionNoMutation2 (state) {
-      state.closeQuestion2 = 'いいえ'
-    },
-    closeQuestionYesMutation3 (state) {
-      state.closeQuestion3 = 'はい'
-    },
-    closeQuestionNoMutation3 (state) {
-      state.closeQuestion3 = 'いいえ'
+    setQuestion3 (state, question3) {
+      state.question3 = question3
     },
     setAnswer (state, answer) {
       state.answer = answer
     }
   },
   actions: {
-    sexChangeManAction: ({commit}) => {
-      commit('sexChangeManMutation')
-    },
-    sexChangeWomanAction: ({commit}) => {
-      commit('sexChangeWomanMutation')
+    getSex: ({commit}, sex) => {
+      commit('setSex', sex)
     },
     getYear: ({commit}, year) => {
       commit('setYear', year)
@@ -68,49 +53,40 @@ export default new Vuex.Store({
     getDay: ({commit}, day) => {
       commit('setDay', day)
     },
-    closeQuestionYesAction1: ({commit}) => {
-      commit('closeQuestionYesMutation1')
+    getQuestion1: ({commit}, question1) => {
+      commit('setQuestion1', question1)
     },
-    closeQuestionNoAction1: ({commit}) => {
-      commit('closeQuestionNoMutation1')
+    getQuestion2: ({commit}, question2) => {
+      commit('setQuestion2', question2)
     },
-    closeQuestionYesAction2: ({commit}) => {
-      commit('closeQuestionYesMutation2')
-    },
-    closeQuestionNoAction2: ({commit}) => {
-      commit('closeQuestionNoMutation2')
-    },
-    closeQuestionYesAction3: ({commit}) => {
-      commit('closeQuestionYesMutation3')
-    },
-    closeQuestionNoAction3: ({commit}) => {
-      commit('closeQuestionNoMutation3')
+    getQuestion3: ({commit}, question3) => {
+      commit('setQuestion3', question3)
     },
     getAnswer: ({commit}, answer) => {
       commit('setAnswer', answer)
     }
   },
   getters: {
-    currentSexQuestion: state => {
-      return state.sexQuestion
+    sex: state => {
+      return state.sex
     },
-    currentYear: state => {
+    year: state => {
       return state.year
     },
-    currentMonth: state => {
+    month: state => {
       return state.month
     },
-    currentDay: state => {
+    day: state => {
       return state.day
     },
-    currentCloseQuestion1: state => {
-      return state.closeQuestion1
+    question1: state => {
+      return state.question1
     },
-    currentCloseQuestion2: state => {
-      return state.closeQuestion2
+    question2: state => {
+      return state.question2
     },
-    currentCloseQuestion3: state => {
-      return state.closeQuestion3
+    question3: state => {
+      return state.question3
     },
     answer: state => {
       return state.answer
